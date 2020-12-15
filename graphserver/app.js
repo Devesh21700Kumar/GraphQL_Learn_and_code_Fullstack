@@ -13,17 +13,7 @@ require('dotenv').config();
 // DB connection
 require('./db/connect.js')();
 
-//CONNECTING MONGOOSE:-
-/*mongoose.connect("mongodb+srv://Dev:6pbj8ThNKTBsOupS@cluster0.op0lq.mongodb.net/<dbname>?retryWrites=true&w=majority",
-{
- useNewUrlParser:true,
- useCreateIndex:true,
- useUnifiedTopology: true 
-}).then(()=>{
-	console.log('connected to DB');
-}).catch(err=>{
-	console.log('ERROR',err.message);
-});*/
+
 
 //used as middleware here
 app.use('/graphql',graphqlHTTP({
