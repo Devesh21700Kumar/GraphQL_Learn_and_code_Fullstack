@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-mongodb+srv://Dev:<6pbj8ThNKTBsOupS>@cluster0.op0lq.mongodb.net/<dbname>?retryWrites=true&w=majority
+mongodb+srv://MongoUrl
 
 
 //used as middleware here
