@@ -1,9 +1,12 @@
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
-const schema = require('./schema/schema');
-const mongoose = require('mongoose');
 //helps express understand graphql
 //also used as middleware
+
+const schema = require('./schema/schema');
+const mongoose = require('mongoose');
+
+
 
 const app = express();
 
@@ -21,12 +24,13 @@ app.use('/graphql',graphqlHTTP({
     schema,
     //providing a string
     graphiql:true
+    //graphiql to test queries
 }));
 //the above function graphqlHTTP take some options inside an object
 //the above functio which uses the middleware.. it needs to know about the graph
 //graph needs a schema
 
 
-app.listen(4000,()=>{
+app.listen(process.env.PORT,()=>{
  console.log('listening');
 });
