@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 //made a query using apollo boost and gql
 import {graphql} from 'react-apollo';
-import {getAuthorsQuery} from '../queries/queries';
+//compose function to bind the below 2 queries
+import {flowRight as compose} from 'lodash';
+//compose now as flowright in graphql
+import {getAuthorsQuery,addBookMutation} from '../queries/queries';
 
 class AddBook extends Component {
     constructor(props){
@@ -13,19 +16,23 @@ class AddBook extends Component {
         };
     }
     displayAuthors(){
-        var data = this.props.data;
+        var data = this.props.getAuthorsQuery;
         //data as props and has a loading property true or false
+        console.log(data);
         if(data.loading){
             return( <option disabled>Loading authors</option> );
         } else {
             return data.authors.map(author => {
-                return( <option key={ author.id } value={author.id}>{ author.name }</option> );
+                return( <option key={ author.id } 
+                    value={author.id}>
+                        { author.name }
+                </option> );
             });
         }
     }
     onSubmitForm=(e)=>{
         e.preventDefault();
-        console.log(this.state);
+        this.props.addBookMutation();
     }
     render(){
         return(
@@ -51,4 +58,7 @@ class AddBook extends Component {
     }
 }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+    graphql(getAuthorsQuery,{name:'getAuthorsQuery'}),
+    graphql(addBookMutation,{name:'addBookMutation'})
+)(AddBook);
