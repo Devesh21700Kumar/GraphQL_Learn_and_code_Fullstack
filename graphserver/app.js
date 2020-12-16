@@ -2,13 +2,15 @@ const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 //helps express understand graphql
 //also used as middleware
+const cors = require('cors');
+//when serve runs on another port than client
 
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
-
-
-
 const app = express();
+
+//allow cross origin requests using cors
+app.use(cors());
 
 // enables environment variables
 require('dotenv').config();
